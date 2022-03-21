@@ -34,8 +34,8 @@
       </h1>
       <div class="searchArea">
         <form action="###" class="searchForm">
-          <input 
-          v-model="keywords"
+          <input
+            v-model="keywords"
             type="text"
             id="autocomplete"
             class="input-error input-xxlarge"
@@ -58,21 +58,20 @@ export default {
   name: "HeaderIndex",
   data() {
     return {
-      keywords:''
-    }
+      keywords: "",
+    };
   },
   methods: {
     goSearch() {
-      this.$router.push({
-        name:'search',
-        query: {
-    keywords:this.keywords
-        },
-        params:{
-          key:this.keywords
-        }
-
-      });
+      let location = { name: "search" };
+      if (this.$route.query) {
+        location.query = { keywords: this.keywords, ...this.$route.query };
+      } else {
+        location.query = {
+          keywords: this.keywords,
+        };
+      }
+      this.$router.push(location);
     },
   },
 };

@@ -49,7 +49,7 @@ var _default = new _vueRouter["default"]({
       var query = _ref.query,
           params = _ref.params;
       return {
-        keywords: query.keywords
+        query: query
       };
     }
   }, {

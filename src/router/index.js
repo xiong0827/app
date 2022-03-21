@@ -6,17 +6,14 @@ import Search from '@/pages/Search'
 import Register from '@/pages/Register'
 import Login from '@/pages/Login'
 
-let originPush=VueRouter.prototype.push
+let originPush = VueRouter.prototype.push
 
-VueRouter.prototype.push=function(location,resolve,reject)
-{
-if(resolve || reject)
-{
-  originPush.call(this,location,resolve,reject)
-}
-else{
-    originPush.call(this,location,()=>{},()=>{})
-}
+VueRouter.prototype.push = function (location, resolve, reject) {
+    if (resolve || reject) {
+        originPush.call(this, location, resolve, reject)
+    } else {
+        originPush.call(this, location, () => {}, () => {})
+    }
 }
 
 export default new VueRouter({
@@ -28,17 +25,18 @@ export default new VueRouter({
             }
         },
         {
-            name:'search',
+            name: 'search',
             path: '/search/:key?',
             component: Search,
             meta: {
                 footerIsShow: true
             },
             props({
-                query,params
+                query,
+                params
             }) {
                 return {
-                    keywords: query.keywords,
+                    query
                 }
             }
         },
