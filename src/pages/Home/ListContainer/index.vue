@@ -80,7 +80,6 @@
 
 <script>
 import { mapState } from "vuex";
-import Swiper from "swiper";
 export default {
   name: "ListContainer",
   data() {
@@ -88,12 +87,13 @@ export default {
   },
   mounted() {
     //派发acton通过vuex发起请求
-    this.$store.dispatch("bannerList");
+    this.$store.dispatch("home/bannerList");
   },
   methods: {},
   updated() {},
   computed: {
-    ...mapState({ bannerList: (state) => state.home.bannerList }),
+    // ...mapState({ bannerList: (state) => state.home.bannerList }),
+    ...mapState('home',{bannerList:'bannerList'})
   },
 };
 </script>
@@ -169,7 +169,7 @@ export default {
           width: 25%;
 
           .list-item {
-            background-image: url(./images/home/icons.png);
+            background-image: url(~@/assets/images/icons.png);
             width: 61px;
             height: 40px;
             display: block;

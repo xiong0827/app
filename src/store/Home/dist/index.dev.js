@@ -8,6 +8,7 @@ exports["default"] = void 0;
 var _api = require("@/api");
 
 var _default = {
+  namespaced: true,
   actions: {
     categoryList: function categoryList(_ref, value) {
       var commit, result;

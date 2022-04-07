@@ -11,6 +11,8 @@ var _nprogress = _interopRequireDefault(require("nprogress"));
 
 require("nprogress/nprogress.css");
 
+var _store = _interopRequireDefault(require("@/store"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 //对axios进行封装
@@ -26,6 +28,11 @@ var requests = _axios["default"].create({
 
 requests.interceptors.request.use(function (config) {
   //config是一个配置对象对象里面有一个属性很重要，header请求头
+  if (_store["default"].state.detail.uuid) {
+    //请求头添加一个临时身份
+    config.headers.userTempId = _store["default"].state.detail.uuid;
+  }
+
   _nprogress["default"].start();
 
   return config;

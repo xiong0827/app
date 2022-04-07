@@ -1,16 +1,16 @@
 import {
-    reqCategoryList,
+reqCategoryList,
     reqCatBannerList,
-    reqFloorList
+    reqFloorList,
 } from "@/api";
-
 export default {
-
+    namespaced:true,
     actions: {
         async categoryList({
             commit
         }, value) {
             let result = await reqCategoryList();
+
             if (result.code == 200) {
                 commit('CATEGORYLIST', result.data)
             }
@@ -39,7 +39,7 @@ export default {
         BANNERLIST(state, bannerList) {
             state.bannerList = bannerList
         },
-       REQFLOORLIST(state, floorList) {
+        REQFLOORLIST(state, floorList) {
             state.floorList = floorList
         }
     },

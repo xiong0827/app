@@ -26,10 +26,10 @@
               :key="c1.categoryId"
               :class="{ cur: currentIndex == index }"
             >
-              <h3 @mouseenter="changeIndex(index)">
+              <h3 @mouseenter="changeIndex(index)" >
                 <a
                   :data-categoryName="c1.categoryName"
-                  :data-categoryId="c1.categoryId"
+                  :data-categoryId="c1.category1Id"
                   >{{ c1.categoryName }}</a
                 >
               </h3>
@@ -54,7 +54,7 @@
                       <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
                         <a
                           :data-categoryName="c3.categoryName"
-                          :data-category3Id="c2.categoryId"
+                          :data-category3Id="c3.categoryId"
                           >{{ c3.categoryName }}</a
                         >
                       </em>
@@ -96,33 +96,35 @@ export default {
     }),
     goSearch(event) {
       let e = event.target;
-      let { categoryname, categoryid, category2id, category3id } = e.dataset;
+      let { categoryname, category1id, category2id, category3id } = e.dataset;
 
       if (categoryname) {
         let location = { name: "search" };
-        let query = { categoryname: categoryname };
-        if (categoryid) {
-          query.categoryId = categoryid;
+        let query = { categoryName: categoryname };
+        if (category1id) {
+          query.category1Id = category1id;
         } else if (category2id) {
           query.category2Id = category2id;
         } else {
           query.category3Id = category3id;
         }
-        if (this.$route.query) {
-          location.query = { ...query, ...this.$route.query };
-          this.$router.push(location);
+        if (this.$route.params) {
+          location.query = { ...query,};
+          location.params={...this.$route.params}
         } else {
           location.query = query;
-          this.$router.push(location);
         }
+             this.$router.push(location);
       }
     },
+    //其他模块鼠标触摸 模块的显示与消失
     leaveIndex() {
       this.currentIndex = -1;
       if (this.$route.path != "/home") {
         this.show = false;
       }
     },
+
     entershow() {
       if (this.$route.path != "/home") {
         this.show = true;

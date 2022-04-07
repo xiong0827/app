@@ -29,10 +29,11 @@ components:{
   Brand
 },
 mounted() {
-    this.$store.dispatch('reqFloorList')
+    this.$store.dispatch('home/reqFloorList');
+    this.$store.dispatch('user/getUserInfo')
 },
 computed:{
-...mapState({floorList:state=>state.home.floorList})
+...mapState({floorList:state=>state.home.floorList}),
 }
 }
 </script>

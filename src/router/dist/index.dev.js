@@ -9,13 +9,7 @@ var _vue = _interopRequireDefault(require("vue"));
 
 var _vueRouter = _interopRequireDefault(require("vue-router"));
 
-var _Home = _interopRequireDefault(require("@/pages/Home"));
-
-var _Search = _interopRequireDefault(require("@/pages/Search"));
-
-var _Register = _interopRequireDefault(require("@/pages/Register"));
-
-var _Login = _interopRequireDefault(require("@/pages/Login"));
+var _routes = _interopRequireDefault(require("./routes"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -32,45 +26,13 @@ _vueRouter["default"].prototype.push = function (location, resolve, reject) {
 };
 
 var _default = new _vueRouter["default"]({
-  routes: [{
-    path: '/home',
-    component: _Home["default"],
-    meta: {
-      footerIsShow: true
-    }
-  }, {
-    name: 'search',
-    path: '/search/:key?',
-    component: _Search["default"],
-    meta: {
-      footerIsShow: true
-    },
-    props: function props(_ref) {
-      var query = _ref.query,
-          params = _ref.params;
-      return {
-        query: query
-      };
-    }
-  }, {
-    path: '/register',
-    component: _Register["default"],
-    meta: {
-      footerIsShow: false
-    }
-  }, {
-    path: '/login',
-    component: _Login["default"],
-    meta: {
-      footerIsShow: false
-    }
-  }, {
-    path: "*",
-    redirect: '/home',
-    meta: {
-      footerIsShow: true
-    }
-  }]
+  routes: _routes["default"],
+  scrollBehavior: function scrollBehavior(to, from, savedPosition) {
+    // return 期望滚动到哪个的位置
+    return {
+      y: 0
+    };
+  }
 });
 
 exports["default"] = _default;

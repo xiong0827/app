@@ -1,11 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
-import Home from '@/pages/Home'
-import Search from '@/pages/Search'
-import Register from '@/pages/Register'
-import Login from '@/pages/Login'
-
+import routes from './routes'
 let originPush = VueRouter.prototype.push
 
 VueRouter.prototype.push = function (location, resolve, reject) {
@@ -17,49 +13,9 @@ VueRouter.prototype.push = function (location, resolve, reject) {
 }
 
 export default new VueRouter({
-    routes: [{
-            path: '/home',
-            component: Home,
-            meta: {
-                footerIsShow: true
-            }
-        },
-        {
-            name: 'search',
-            path: '/search/:key?',
-            component: Search,
-            meta: {
-                footerIsShow: true
-            },
-            props({
-                query,
-                params
-            }) {
-                return {
-                    query
-                }
-            }
-        },
-        {
-            path: '/register',
-            component: Register,
-            meta: {
-                footerIsShow: false
-            }
-        },
-        {
-            path: '/login',
-            component: Login,
-            meta: {
-                footerIsShow: false
-            }
-        },
-        {
-            path: "*",
-            redirect: '/home',
-            meta: {
-                footerIsShow: true
-            }
-        }
-    ]
+    routes,
+    scrollBehavior (to, from, savedPosition) {
+        // return 期望滚动到哪个的位置
+        return {y:0}
+      }
 })

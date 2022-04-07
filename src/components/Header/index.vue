@@ -5,17 +5,22 @@
       <div class="container">
         <div class="loginList">
           <p>尚品汇欢迎您！</p>
-          <p>
+          <p v-if="!userInfo.name">
             <span>请</span>
             <router-link to="/login" href="###">登录</router-link>
             <router-link to="/register" href="###" class="register"
               >免费注册</router-link
             >
           </p>
+          <p v-else>
+          <a href="#"> {{userInfo.name}}</a>
+          <span> | </span>
+          <a href="" @click="exitUser">退出</a>
+          </p>
         </div>
         <div class="typeList">
           <a href="###">我的订单</a>
-          <a href="###">我的购物车</a>
+        <router-link to="/shopCart">我的购物车</router-link>
           <a href="###">我的尚品汇</a>
           <a href="###">尚品汇会员</a>
           <a href="###">企业采购</a>
@@ -35,7 +40,7 @@
       <div class="searchArea">
         <form action="###" class="searchForm">
           <input
-            v-model="keywords"
+            v-model="keyword"
             type="text"
             id="autocomplete"
             class="input-error input-xxlarge"
@@ -54,26 +59,41 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   name: "HeaderIndex",
   data() {
     return {
-      keywords: "",
+      keyword: "",
     };
   },
   methods: {
     goSearch() {
       let location = { name: "search" };
       if (this.$route.query) {
-        location.query = { keywords: this.keywords, ...this.$route.query };
+        location.query = {...this.$route.query };
+        location.params={ keyword: this.keyword, }
       } else {
-        location.query = {
-          keywords: this.keywords,
+        location.params = {
+          keyword: this.keyword,
         };
       }
       this.$router.push(location);
     },
+    exitUser()
+    {
+      localStorage.setItem('TOKEN','')
+    }
   },
+  mounted() {
+    this.$bus.$on('clear',()=>{
+      this.keyword='';
+    this.goSearch();
+    })
+  },
+  computed:{
+    ...mapState('user',['userInfo'])
+  }
 };
 </script>
 
