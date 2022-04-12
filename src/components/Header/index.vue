@@ -7,8 +7,8 @@
           <p>尚品汇欢迎您！</p>
           <p v-if="!userInfo.name">
             <span>请</span>
-            <router-link to="/login" href="###">登录</router-link>
-            <router-link to="/register" href="###" class="register"
+            <router-link to="/login" >登录</router-link>
+            <router-link to="/register"  class="register"
               >免费注册</router-link
             >
           </p>
@@ -82,7 +82,9 @@ export default {
     },
     exitUser()
     {
-      localStorage.setItem('TOKEN','')
+    localStorage.removeItem('TOKEN')
+    this.$store.dispatch('user/logOut')
+ 
     }
   },
   mounted() {

@@ -9,7 +9,7 @@ export default {
         async GoodsInfo({
             commit
         }, value) {
-       
+
             const result = await reqGoodsInfo(value)
             if (result.code == 200) {
                 commit('REQGOODSINFO', result.data)
@@ -35,7 +35,7 @@ export default {
     },
     state: {
         goodsInfo: {},
-        uuid:  uuid.getUUID()
+        uuid: uuid.getUUID()
     },
     getters: {
         categoryView(state) {

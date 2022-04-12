@@ -6,10 +6,13 @@ module.exports = defineConfig({
     proxy: {
       '/api': { //请求的前缀为/api就代理发送
         target: 'http://39.98.123.211',
-        // pathRewrite:{'^api':''},
+        // pathRewrite:{'^api':''},dawdawjdjawodajwdoaiwjdoawijd
         ws: true,  //用于支持websocket
         changeOrigin: false //对服务器说谎
       },
-    }
+    
+    },
+    
+    
   }
 })

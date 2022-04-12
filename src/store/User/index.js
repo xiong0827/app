@@ -2,14 +2,12 @@ import {
     reqGetCode,
     reqUserRegister,
     reqUserLogin,
-    reqGetUserInfo
+    reqGetUserInfo,
+    reqLogout
 } from "@/api"
 import {
-    setToken
+    setToken,getToken,removeToken
 } from "@/utils/token";
-import {
-    get
-} from "lodash";
 export default {
     namespaced: true,
     actions: {
@@ -59,6 +57,18 @@ export default {
             } else {
                 return
             }
+        },
+        async logOut({commit})
+        {
+        let result =await reqLogout()
+        if (result.code==200) {
+            console.log(1);
+            commit('LOGOUT')
+            return 'ok'
+        }
+        else{
+            return Promise.reject(new Error('退出失败'))
+        }
         }
     },
     mutations: {
@@ -70,11 +80,18 @@ export default {
         },
         USERINFO(state, userInfo) {
             state.userInfo = userInfo
+        },
+        // 退出登录
+        LOGOUT(state)
+        {
+            state.token=''
+            state.userInfo={},
+   removeToken()
         }
     },
     state: {
         code: '',
-        token: localStorage.getItem('TOKEN'),
+        token: getToken(),
         userInfo: {}
     },
     getters: {}

@@ -13,7 +13,7 @@ Vue.component(Pagination.name,Pagination)
 //引入vuex
 import store from '@/store'
 Vue.config.productionTip = false
-
+Vue.config.devtools = true
 //引入mock模拟数据
 import '@/mock/mockServe'
 //引入路由
