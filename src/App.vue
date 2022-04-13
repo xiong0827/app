@@ -3,6 +3,7 @@
     <Header/>
     <router-view></router-view>
     <Footer v-show="$route.meta.footerIsShow"/>
+    <h1>iPad</h1>
   </div>
 </template>
 
