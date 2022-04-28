@@ -10,10 +10,12 @@ module.exports = defineConfig({
         // pathRewrite:{'^api':''},
         ws: true,  //用于支持websocket
         changeOrigin: false //对服务器说谎
+        
       },
     
     },
-    
+    historyApiFallback: true,
+    allowedHosts: "all",
     
   }
 })
