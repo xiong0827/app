@@ -1,7 +1,8 @@
+
 export default class checkObj {
     constructor({
         phone,
-       code,
+        code,
         password,
         repassword
     }) {

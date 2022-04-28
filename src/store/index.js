@@ -5,6 +5,7 @@ import search from '@/store/Search'
 import detail from '@/store/Detail'
 import shopCart from '@/store/ShopCart'
 import user from '@/store/User'
+import trade from '@/store/Trade'
 Vue.use(Vuex)
 export default new Vuex.Store({
     modules: {
@@ -12,7 +13,8 @@ export default new Vuex.Store({
         search,
         detail,
         shopCart,
-        user
+        user,
+        trade
     }
 
 })

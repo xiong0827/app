@@ -14,6 +14,7 @@ VueRouter.prototype.push = function (location, resolve, reject) {
 }
 
 const router = new VueRouter({
+    mode: 'history',
     routes,
     scrollBehavior(to, from, savedPosition) {
         // return 期望滚动到哪个的位置
@@ -32,6 +33,7 @@ router.beforeEach((to, from, next) => {
         }
     }
     else{
+        // 未登录不能去订单相关和个人中心
         next()
     }
    

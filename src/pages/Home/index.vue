@@ -30,7 +30,7 @@ components:{
 },
 mounted() {
     this.$store.dispatch('home/reqFloorList');
-    this.$store.dispatch('user/getUserInfo')
+ 
 },
 computed:{
 ...mapState({floorList:state=>state.home.floorList}),

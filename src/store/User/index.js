@@ -6,7 +6,9 @@ import {
     reqLogout
 } from "@/api"
 import {
-    setToken,getToken,removeToken
+    setToken,
+    getToken,
+    removeToken
 } from "@/utils/token";
 export default {
     namespaced: true,
@@ -58,17 +60,17 @@ export default {
                 return
             }
         },
-        async logOut({commit})
-        {
-        let result =await reqLogout()
-        if (result.code==200) {
-            console.log(1);
-            commit('LOGOUT')
-            return 'ok'
-        }
-        else{
-            return Promise.reject(new Error('退出失败'))
-        }
+        async logOut({
+            commit
+        }) {
+            let result = await reqLogout()
+            if (result.code == 200) {
+                console.log(1);
+                commit('LOGOUT')
+                return 'ok'
+            } else {
+                return Promise.reject(new Error('退出失败'))
+            }
         }
     },
     mutations: {
@@ -82,11 +84,10 @@ export default {
             state.userInfo = userInfo
         },
         // 退出登录
-        LOGOUT(state)
-        {
-            state.token=''
-            state.userInfo={},
-   removeToken()
+        LOGOUT(state) {
+            state.token = ''
+            state.userInfo = {},6
+                removeToken()
         }
     },
     state: {

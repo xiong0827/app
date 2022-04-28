@@ -7,20 +7,23 @@
           <p>尚品汇欢迎您！</p>
           <p v-if="!userInfo.name">
             <span>请</span>
-            <router-link to="/login" >登录</router-link>
-            <router-link to="/register"  class="register"
-              >免费注册</router-link
-            >
+            <router-link to="/login">登录</router-link>
+            <router-link to="/register" class="register">免费注册</router-link>
           </p>
           <p v-else>
-          <a href="#"> {{userInfo.name}}</a>
-          <span> | </span>
-          <a href="" @click="exitUser">退出</a>
+            <a href="#"> {{ userInfo.name }}</a>
+            <span> | </span>
+            <a href="" @click="exitUser">退出</a>
           </p>
         </div>
         <div class="typeList">
-          <a href="###">我的订单</a>
-        <router-link to="/shopCart">我的购物车</router-link>
+          <router-link
+            :to="{
+              name: 'center',
+            }"
+            >我的订单</router-link
+          >
+          <router-link to="/shopCart">我的购物车</router-link>
           <a href="###">我的尚品汇</a>
           <a href="###">尚品汇会员</a>
           <a href="###">企业采购</a>
@@ -59,7 +62,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import { mapState } from "vuex";
 export default {
   name: "HeaderIndex",
   data() {
@@ -71,8 +74,8 @@ export default {
     goSearch() {
       let location = { name: "search" };
       if (this.$route.query) {
-        location.query = {...this.$route.query };
-        location.params={ keyword: this.keyword, }
+        location.query = { ...this.$route.query };
+        location.params = { keyword: this.keyword };
       } else {
         location.params = {
           keyword: this.keyword,
@@ -80,22 +83,21 @@ export default {
       }
       this.$router.push(location);
     },
-    exitUser()
-    {
-    localStorage.removeItem('TOKEN')
-    this.$store.dispatch('user/logOut')
- 
-    }
+    exitUser() {
+      localStorage.removeItem("TOKEN");
+      this.$store.dispatch("user/logOut");
+    },
   },
   mounted() {
-    this.$bus.$on('clear',()=>{
-      this.keyword='';
-    this.goSearch();
-    })
+    this.$bus.$on("clear", () => {
+      this.keyword = "";
+      this.goSearch();
+    });
+    this.$store.dispatch("user/getUserInfo");
   },
-  computed:{
-    ...mapState('user',['userInfo'])
-  }
+  computed: {
+    ...mapState("user", ["userInfo"]),
+  },
 };
 </script>
 
